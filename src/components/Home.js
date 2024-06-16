@@ -50,7 +50,7 @@ const Registration = () => {
   const handleAge = (e) => {
     setAge(e.target.value);
   };
- 
+
   const handleLoginClick = () => {
     setIsPopupOpen(true);
   };
@@ -78,7 +78,7 @@ const Registration = () => {
   }, [isPopupOpen]);
 
 
-  
+
   const [user, SetUser] = useState("");
   const [pass, SetPass] = useState("");
 
@@ -1396,8 +1396,8 @@ const Registration = () => {
     SetFamily_Community(value);
   };
 
-  
- 
+
+
   const handlesub_community = (e) => {
     const value = e?.target.value;
     if (value !== null);
@@ -1688,6 +1688,7 @@ const Registration = () => {
 
   const handleFileChanges = (event) => {
     const filez = Array.from(event.target.files);
+    console.log('handleFileChanges_________________2ndinput',filez);
     const currentSelectedFilesz = selectedFilesz.length;
     const newFilesCountz = filez.length;
     if (currentSelectedFilesz + newFilesCountz > 2) {
@@ -1696,7 +1697,7 @@ const Registration = () => {
     }
     const filePreviewsz = filez.map(file => ({
       file,
-      preview: URL.createObjectURL(filez)
+      preview: URL.createObjectURL(file)
     }));
 
     setSelectedFilesz([...selectedFilesz, ...filePreviewsz]);
@@ -1714,7 +1715,7 @@ const Registration = () => {
     event.preventDefault();
     alert('Images Uploaded! (not really, but it would if this was on your website)');
   };
- 
+
   const handleSubmits = (event) => {
     event.preventDefault();
     alert('ID Images Uploaded! (not really, but it would if this was on your website)');
@@ -1730,7 +1731,7 @@ const Registration = () => {
 
   const handleCropSave = async () => {
     const croppedImage = await getCroppedImg(selectedFiles[cropIndex].preview, croppedAreaPixels);
-    const newSelectedFiles = selectedFiles.map((file, index) => 
+    const newSelectedFiles = selectedFiles.map((file, index) =>
       index === cropIndex ? { ...file, preview: croppedImage } : file
     );
     setSelectedFiles(newSelectedFiles);
@@ -1832,8 +1833,8 @@ const Registration = () => {
       .catch((error) => {
         toast.error(
           error?.response?.data?.message +
-            " \n " +
-            error?.response?.data?.error_message
+          " \n " +
+          error?.response?.data?.error_message
         );
         console.log(
           "errorr___________>",
@@ -3088,99 +3089,99 @@ const Registration = () => {
                     </span>
                   </label>
 
-            
+
 
 
                   <div className="container mx-auto my-5 p-5">
-      <div className="flex flex-wrap">
-        <form onSubmit={handleSubmit} className="w-full">
-          <div className="flex flex-col justify-start w-full border-2 border-gray-300 mb-5">
-            <label htmlFor="upload-img" className="w-1/4 cursor-pointer">
-              <div className="bg-pink-600 text-white text-center py-2 px-4 rounded">
-                Choose Files
-              </div>
-            </label>
-            <input
-              type="file"
-              className="hidden"
-              name="images[]"
-              multiple
-              id="upload-img"
-              onChange={handleFileChange}
-            />
-          </div>
-          {selectedFiles.length > 0 && (
-            <div className="bg-gray-100 border border-gray-300 rounded p-4">
-              <div className="font-bold mb-4">{selectedFiles.length} Total Images Selected</div>
-              <div className="flex flex-wrap -m-2">
-                {selectedFiles.map((file, index) => (
-                  <div key={index} className="relative m-2 wrapper-thumb">
-                    <img
-                      src={file.preview}
-                      alt={`Preview ${index}`}
-                      className="img-preview-thumb"
-                    />
-                    <button
-                      type="button"
-                      className="absolute right-2 p-1 -top-1 remove-btn bg-red-600 text-white rounded-full shadow-sm hover:shadow-md transition-all duration-300"
-                      onClick={() => handleRemove(index)}
-                    >
-                      &times;
-                    </button>
-                    <button
-                      type="button"
-                      className="mt-2 w-full px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 transition-all duration-300"
-                      onClick={() => showCropDialog(index)}
-                    >
-                      Edit
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          <button
-            type="submit"
-            className="mt-3 w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-all duration-300"
-          >
-            Upload
-          </button>
-        </form>
-      </div>
+                    <div className="flex flex-wrap">
+                      <form onSubmit={handleSubmit} className="w-full">
+                        <div className="flex flex-col justify-start w-full border-2 border-gray-300 mb-5">
+                          <label htmlFor="upload-img" className="w-1/4 cursor-pointer">
+                            <div className="bg-pink-600 text-white text-center py-2 px-4 rounded">
+                              Choose Files
+                            </div>
+                          </label>
+                          <input
+                            type="file"
+                            className="hidden"
+                            name="images[]"
+                            multiple
+                            id="upload-img"
+                            onChange={handleFileChange}
+                          />
+                        </div>
+                        {selectedFiles.length > 0 && (
+                          <div className="bg-gray-100 border border-gray-300 rounded p-4">
+                            <div className="font-bold mb-4">{selectedFiles.length} Total Images Selected</div>
+                            <div className="flex flex-wrap -m-2">
+                              {selectedFiles.map((file, index) => (
+                                <div key={index} className="relative m-2 wrapper-thumb">
+                                  <img
+                                    src={file.preview}
+                                    alt={`Preview ${index}`}
+                                    className="img-preview-thumb"
+                                  />
+                                  <button
+                                    type="button"
+                                    className="absolute right-2 p-1 -top-1 remove-btn bg-red-600 text-white rounded-full shadow-sm hover:shadow-md transition-all duration-300"
+                                    onClick={() => handleRemove(index)}
+                                  >
+                                    &times;
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="mt-2 w-full px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 transition-all duration-300"
+                                    onClick={() => showCropDialog(index)}
+                                  >
+                                    Edit
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        <button
+                          type="submit"
+                          className="mt-3 w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-all duration-300"
+                        >
+                          Upload
+                        </button>
+                      </form>
+                    </div>
 
-      <Dialog open={isCropDialogOpen} onClose={() => setIsCropDialogOpen(false)}>
-        <DialogTitle className="text-white bold bg-pink-600">Crop Image</DialogTitle>
-        <DialogContent>
-          <div className="crop-container">
-            <Cropper
-              image={cropIndex !== null ? selectedFiles[cropIndex].preview : null}
-              crop={crop}
-              zoom={zoom}  
-              aspect={4 / 3}
-              onCropChange={setCrop}
-              onZoomChange={setZoom}
-              onCropComplete={handleCropComplete}
-            />
-          </div>
-          <Slider
-            value={zoom}
-            min={1}
-            max={3}
-            step={0.1}
-            aria-labelledby="Zoom"
-            onChange={(e, zoom) => setZoom(zoom)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setIsCropDialogOpen(false)} color="secondary">
-            Cancel
-          </Button>
-          <Button onClick={handleCropSave} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+                    <Dialog open={isCropDialogOpen} onClose={() => setIsCropDialogOpen(false)}>
+                      <DialogTitle className="text-white bold bg-pink-600">Crop Image</DialogTitle>
+                      <DialogContent>
+                        <div style={{height:300,width:450}} className="crop-container">
+                          <Cropper
+                            image={cropIndex !== null ? selectedFiles[cropIndex].preview : null}
+                            crop={crop}
+                            zoom={zoom}
+                            aspect={4 / 3}
+                            onCropChange={setCrop}
+                            onZoomChange={setZoom}
+                            onCropComplete={handleCropComplete}
+                          />
+                        </div>
+                        <Slider
+                          value={zoom}
+                          min={1}
+                          max={3}
+                          step={0.1}
+                          aria-labelledby="Zoom"
+                          onChange={(e, zoom) => setZoom(zoom)}
+                        />
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={() => setIsCropDialogOpen(false)} color="secondary">
+                          Cancel
+                        </Button>
+                        <Button onClick={handleCropSave} color="primary">
+                          Save
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+                  </div>
 
 
                   <label
@@ -3197,52 +3198,59 @@ const Registration = () => {
                   </label>
 
                   <div className="container mx-auto my-5 p-5">
-  <div className="flex flex-wrap">
-    <form onSubmit={handleSubmits} className="w-full">
-      <div className="flex flex-col  justify-start w-full  border-2 border-gray-300 mb-5">
-        <label htmlFor="upload-imgs" className="w-1/4 cursor-pointer">
-          <div className="bg-pink-600 text-white text-center py-2 px-4 rounded">
-            Choose Files
-          </div>
-        </label>
-        <input
-          type="file"
-          className="hidden"
-          name="images[]"
-          multiple
-          id="upload-imgs"
-          onChange={handleFileChanges}
-        />
-      </div>
-      {selectedFilesz.length > 0 && (
-        <div className="bg-gray-100 border border-gray-300 rounded p-4">
-          <div className="font-bold mb-4">{selectedFilesz.length} Total Images Selected</div>
-          <div className="flex flex-wrap -m-2">
-            {selectedFilesz.map((filez, index) => (
-              <div key={index} className="relative m-2 wrapper-thumb">
-                <img
-                  src={filez.preview}
-                  alt={`Preview ${index}`}
-                  className="img-preview-thumb"
-                />
-                <button
-                  type="button"
-                  className="absolute right-2 p-1 -top-1  remove-btn bg-red-600 text-white rounded-full shadow-sm hover:shadow-md transition-all duration-300"
-                  onClick={() => handleRemoved(index)}
-                >
-                  &times;
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-      <button type="submit" className="mt-3 w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-all duration-300">
-        Upload
-      </button>
-    </form>
-  </div>
-</div>
+                    <div className="flex flex-wrap">
+                      <form onSubmit={handleSubmits} className="w-full">
+                        <div className="flex flex-col  justify-start w-full  border-2 border-gray-300 mb-5">
+                          <label htmlFor="upload-imgs" className="w-1/4 cursor-pointer">
+                            <div className="bg-pink-600 text-white text-center py-2 px-4 rounded">
+                              Choose Files
+                            </div>
+                          </label>
+                          <input
+                            type="file"
+                            className="hidden"
+                            name="images[]"
+                            multiple
+                            id="upload-imgs"
+                            onChange={handleFileChanges}
+                          />
+                        </div>
+                        {selectedFilesz.length > 0 && (
+                          <div className="bg-gray-100 border border-gray-300 rounded p-4">
+                            <div className="font-bold mb-4">{selectedFilesz.length} Total Images Selected</div>
+                            <div className="flex flex-wrap -m-2">
+                              {selectedFilesz.map((filez, index) => (
+                                <div key={index} className="relative m-2 wrapper-thumb">
+                                <img
+                                  src={filez.preview}
+                                  alt={`Preview ${index}`}
+                                  className="img-preview-thumb"
+                                />
+                                <button
+                                  type="button"
+                                  className="absolute right-2 p-1 -top-1 remove-btn bg-red-600 text-white rounded-full shadow-sm hover:shadow-md transition-all duration-300"
+                                  onClick={() => handleRemove(index)}
+                                >
+                                  &times;
+                                </button>
+                                <button
+                                  type="button"
+                                  className="mt-2 w-full px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 transition-all duration-300"
+                                  onClick={() => showCropDialog(index)}
+                                >
+                                  Edit
+                                </button>
+                              </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        <button type="submit" className="mt-3 w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-all duration-300">
+                          Upload
+                        </button>
+                      </form>
+                    </div>
+                  </div>
 
                   <label
                     className=" tracking-wide pt-2 text-gray-600 text-xs
