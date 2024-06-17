@@ -23,7 +23,7 @@ const Registration = () => {
   const handleFileChange2 = (e) => {
     const selectedFiles = Array.from(e.target.files);
     if (selectedFiles.length > 2) {
-      alert("You can only upload a maximum of 2 files");
+      alert("You can only upload a maximum of 2 photos. One image should be front view and next one should be back side ");
       return;
     }
     setFiles2(selectedFiles);
