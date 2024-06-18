@@ -20,67 +20,6 @@ const Registration = () => {
   const [files, setFiles] = useState([]);
   const [files2, setFiles2] = useState([]);
 
-
-
-
-  // api calling
-
-  const [educationData, setEducationData] = useState([]);
-  const [professionData, setProfessionData] = useState([]);
-  const [occupationData, setOccupationData] = useState([]);
-  const [countryData, setCountryData] = useState([]);
-  const [stateData, setStateData] = useState([]);
-  const [cityData, setCityData] = useState([]);
-  const [isError, setIsError] = useState('');
-
-  // api calling
-  const getApiData = async () => {
-    try {
-      const educationRes = await axios.get("https://api.postman.com/collections/29390551-b6fef7c9-413c-49c6-9111-71d0a9d31195?access_key=PMAT-01HZCC35AWRSCCM0NBZMVK88W3");
-      const professionRes = await axios.get("https://api.postman.com/collections/29390551-b6fef7c9-413c-49c6-9111-71d0a9d31195?access_key=PMAT-01HZCC35AWRSCCM0NBZMVK88W3");
-      const occupationRes = await axios.get("https://api.postman.com/collections/29390551-b6fef7c9-413c-49c6-9111-71d0a9d31195?access_key=PMAT-01HZCC35AWRSCCM0NBZMVK88W3");
-      const countryRes = await axios.get("https://api.postman.com/collections/29390551-b6fef7c9-413c-49c6-9111-71d0a9d31195?access_key=PMAT-01HZCC35AWRSCCM0NBZMVK88W3");
-      const stateRes = await axios.get("https://api.postman.com/collections/29390551-b6fef7c9-413c-49c6-9111-71d0a9d31195?access_key=PMAT-01HZCC35AWRSCCM0NBZMVK88W3");
-      const cityRes = await axios.get("https://api.postman.com/collections/29390551-b6fef7c9-413c-49c6-9111-71d0a9d31195?access_key=PMAT-01HZCC35AWRSCCM0NBZMVK88W3");
-
-      setEducationData(educationRes.collection.item);
-      setProfessionData(professionRes.data);
-      setOccupationData(occupationRes.data);
-      setCountryData(countryRes.data);
-      setStateData(stateRes.data);
-      setCityData(cityRes.data);
-    } catch (error) {
-      setIsError(error.message);
-    }
-  };
-
-  useEffect(() => {
-    getApiData();
-  }, []);
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    const formData = {
-    };
-
-    try {
-      const res = await axios.post("USER_REGISTER_API_ENDPOINT", formData);
-      console.log('Registration Successful', res.data);
-    } catch (error) {
-      setIsError(error.message);
-    }
-  };
-
-
-
-  // end api
-
-
-
-
-
-
-
   const handleFileChange2 = (e) => {
     const selectedFiles = Array.from(e.target.files);
     if (selectedFiles.length > 2) {
@@ -1749,7 +1688,7 @@ const Registration = () => {
 
   const handleFileChanges = (event) => {
     const filez = Array.from(event.target.files);
-    console.log('handleFileChanges_________________2ndinput', filez);
+    console.log('handleFileChanges_________________2ndinput',filez);
     const currentSelectedFilesz = selectedFilesz.length;
     const newFilesCountz = filez.length;
     if (currentSelectedFilesz + newFilesCountz > 2) {
@@ -1904,9 +1843,9 @@ const Registration = () => {
       });
   };
 
-  // const [countryData, setCountryData] = useState([]);
-  // const [stateData, setStateData] = useState([]);
-  // const [cityData, setCityData] = useState([]);
+  const [countryData, setCountryData] = useState([]);
+  const [stateData, setStateData] = useState([]);
+  const [cityData, setCityData] = useState([]);
 
   const [selectedCountry, setSelectedCountry] = useState();
   const [selectedState, setSelectedState] = useState();
@@ -1965,52 +1904,6 @@ const Registration = () => {
 
   return (
     <>
-
-      
-      {/* api data  */}
-
-      {isError && <p>Error: {isError}</p>}
-      <form onSubmit={handleRegister}>
-        <select>
-          <option value="0">Any</option>
-          {educationData.map(edu => (
-            <option key={edu.id} value={edu.name}>{edu.name}</option>
-          ))}
-        </select>
-        <select>
-          <option value="0">Any</option>
-          {professionData.map(prof => (
-            <option key={prof.id} value={prof.name}>{prof.name}</option>
-          ))}
-        </select>
-        <select>
-          <option value="0">Any</option>
-          {occupationData.map(occ => (
-            <option key={occ.id} value={occ.name}>{occ.name}</option>
-          ))}
-        </select>
-        <select>
-          <option value="0">Any</option>
-          {countryData.map(country => (
-            <option key={country.id} value={country.name}>{country.name}</option>
-          ))}
-        </select>
-        <select>
-          <option value="0">Any</option>
-          {stateData.map(state => (
-            <option key={state.id} value={state.name}>{state.name}</option>
-          ))}
-        </select>
-        <select>
-          <option value="0">Any</option>
-          {cityData.map(city => (
-            <option key={city.id} value={city.name}>{city.name}</option>
-          ))}
-        </select>
-        <button type="submit">Register</button>
-      </form>
-      {/* end data */}
-
       <Header />
       <div className="main_container  mx-auto">
         <div className="pmd:mb-[315%] ps:mb-[270%]">
@@ -3259,7 +3152,7 @@ const Registration = () => {
                     <Dialog open={isCropDialogOpen} onClose={() => setIsCropDialogOpen(false)}>
                       <DialogTitle className="text-white bold bg-pink-600">Crop Image</DialogTitle>
                       <DialogContent>
-                        <div style={{ height: 300, width: 450 }} className="crop-container">
+                        <div style={{height:300,width:450}} className="crop-container">
                           <Cropper
                             image={cropIndex !== null ? selectedFiles[cropIndex].preview : null}
                             crop={crop}
@@ -3328,26 +3221,26 @@ const Registration = () => {
                             <div className="flex flex-wrap -m-2">
                               {selectedFilesz.map((filez, index) => (
                                 <div key={index} className="relative m-2 wrapper-thumb">
-                                  <img
-                                    src={filez.preview}
-                                    alt={`Preview ${index}`}
-                                    className="img-preview-thumb"
-                                  />
-                                  <button
-                                    type="button"
-                                    className="absolute right-2 p-1 -top-1 remove-btn bg-red-600 text-white rounded-full shadow-sm hover:shadow-md transition-all duration-300"
-                                    onClick={() => handleRemove(index)}
-                                  >
-                                    &times;
-                                  </button>
-                                  <button
-                                    type="button"
-                                    className="mt-2 w-full px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 transition-all duration-300"
-                                    onClick={() => showCropDialog(index)}
-                                  >
-                                    Edit
-                                  </button>
-                                </div>
+                                <img
+                                  src={filez.preview}
+                                  alt={`Preview ${index}`}
+                                  className="img-preview-thumb"
+                                />
+                                <button
+                                  type="button"
+                                  className="absolute right-2 p-1 -top-1 remove-btn bg-red-600 text-white rounded-full shadow-sm hover:shadow-md transition-all duration-300"
+                                  onClick={() => handleRemove(index)}
+                                >
+                                  &times;
+                                </button>
+                                <button
+                                  type="button"
+                                  className="mt-2 w-full px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 transition-all duration-300"
+                                  onClick={() => showCropDialog(index)}
+                                >
+                                  Edit
+                                </button>
+                              </div>
                               ))}
                             </div>
                           </div>
