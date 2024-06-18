@@ -20,9 +20,6 @@ const Registration = () => {
   const [files, setFiles] = useState([]);
   const [files2, setFiles2] = useState([]);
 
-
-
-
   // api calling
 
   const [educationData, setEducationData] = useState([]);
@@ -31,6 +28,9 @@ const Registration = () => {
   const [countryData, setCountryData] = useState([]);
   const [stateData, setStateData] = useState([]);
   const [cityData, setCityData] = useState([]);
+  const [loginData, setLoginData] = useState([]);
+  const [registerData, setRegisterData] = useState([])
+
   const [isError, setIsError] = useState('');
 
   // api calling
@@ -42,6 +42,8 @@ const Registration = () => {
       const countryRes = await axios.get("https://api.postman.com/collections/29390551-b6fef7c9-413c-49c6-9111-71d0a9d31195?access_key=PMAT-01HZCC35AWRSCCM0NBZMVK88W3");
       const stateRes = await axios.get("https://api.postman.com/collections/29390551-b6fef7c9-413c-49c6-9111-71d0a9d31195?access_key=PMAT-01HZCC35AWRSCCM0NBZMVK88W3");
       const cityRes = await axios.get("https://api.postman.com/collections/29390551-b6fef7c9-413c-49c6-9111-71d0a9d31195?access_key=PMAT-01HZCC35AWRSCCM0NBZMVK88W3");
+      const loginRes = await axios.get("https://api.postman.com/collections/29390551-b6fef7c9-413c-49c6-9111-71d0a9d31195?access_key=PMAT-01HZCC35AWRSCCM0NBZMVK88W3");
+      const registerRes = await axios.get("https://api.postman.com/collections/29390551-b6fef7c9-413c-49c6-9111-71d0a9d31195?access_key=PMAT-01HZCC35AWRSCCM0NBZMVK88W3");
 
       setEducationData(educationRes.collection.item);
       setProfessionData(professionRes.data);
@@ -49,6 +51,8 @@ const Registration = () => {
       setCountryData(countryRes.data);
       setStateData(stateRes.data);
       setCityData(cityRes.data);
+      setLoginData(loginRes.data);
+      setRegisterData(registerRes.data);
     } catch (error) {
       setIsError(error.message);
     }
@@ -71,13 +75,19 @@ const Registration = () => {
     }
   };
 
-
-
   // end api
 
 
+  const [maritalStatus, setMaritalStatus] = useState('');
+  const [partnerMaritalStatus, setPartnerMaritalStatus] = useState('');
 
+  const handleMaritalStatus = (selectedOption) => {
+    setMaritalStatus(selectedOption ? selectedOption.value : '');
+  };
 
+  const handlePartnerMaritalStatus = (selectedOption) => {
+    setPartnerMaritalStatus(selectedOption ? selectedOption.value : '');
+  };
 
 
 
@@ -908,6 +918,11 @@ const Registration = () => {
     { value: "Registered partnership", label: "Registered partnership" },
   ];
 
+  const kid = [
+    { value: "yes", label: "yes" },
+    { value: "no", label: "no" },
+  ]
+
   const Heights = [
     { value: "4 '", label: "4 '" },
     { value: "4 ' 1 \"", label: "4 ' 1 \"" },
@@ -1269,7 +1284,7 @@ const Registration = () => {
   const [partner_ExpectationDetailes, SetPartner_ExpectationDetailes] =
     useState("");
 
-  const [maritalStatus, SetMaritalStatus] = useState("");
+  // const [maritalStatus, setMaritalStatus] = useState("");
 
   const [bloodGroup, SetBloodGroup] = useState("");
 
@@ -1534,7 +1549,7 @@ const Registration = () => {
   const handlemaritalStatus = (e) => {
     const value = e.value;
     if (value !== null);
-    SetMaritalStatus(value);
+    setMaritalStatus(value);
   };
 
   const handlePartner_maritalStatus = (e) => {
@@ -1966,7 +1981,7 @@ const Registration = () => {
   return (
     <>
 
-      
+
       {/* api data  */}
 
       {isError && <p>Error: {isError}</p>}
@@ -2006,6 +2021,19 @@ const Registration = () => {
           {cityData.map(city => (
             <option key={city.id} value={city.name}>{city.name}</option>
           ))}
+          <select>
+            <option value="0">Any</option>
+            {loginData.map(log => (
+              <option key={log.id} value={log.name}>{log.name}</option>
+            ))}
+          </select>
+          <select>
+            <option value="0">Any</option>
+            {registerData.map(reg => (
+              <option key={reg.id} value={reg.name}>{reg.name}</option>
+            ))}
+          </select>
+
         </select>
         <button type="submit">Register</button>
       </form>
@@ -2722,7 +2750,7 @@ const Registration = () => {
                         className=" tracking-wide text-gray-600 text-sm font-bold mb-2"
                         htmlFor="company"
                       >
-                        Mariatal Status<span className="text-red-500 ">*</span>
+                        Marital Status<span className="text-red-500 ">*</span>
                       </label>
 
                       <Select
@@ -3609,12 +3637,55 @@ const Registration = () => {
                         Mariatal Status<span className="text-red-500 ">*</span>
                       </label>
 
-                      <Select
+
+
+                      {/* marital status */}
+
+                      <div>
+                        <div className="form-group">
+                          {/* <label>Marital Status:</label> */}
+                          <Select
+                            onChange={handleMaritalStatus}
+                            options={Marital_status}
+                            className="text-gray-600 border border-gray-400 mt-2"
+                          />
+                        </div>
+                        {maritalStatus !== 'Unmarried' && (
+                          <div className="form-group">
+                            <label>Accept kid</label>
+                            <Select
+                              onChange={(e) => console.log(e)}
+                              options={kid}
+                              className="text-gray-600 border border-gray-400 mt-2"
+                            />
+                          </div>
+                        )}
+
+                        {maritalStatus !== 'Unmarried' && (
+                          <div className="form-group">
+                            <label>Kids Description:</label>
+                            <textarea
+                              onChange={(e) => handlepartner_expectation(e)}
+                              className="w-full  px-4 text-blue-900 border-2 border-[#bcbcbc] bg-transparent outline outline-0 transition-all placeholder-shown:border focus:border-[3px] focus:border-pink-500 focus:outline-0 rounded mt-2"
+                              id="message"
+                              type="text"
+                            />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* end status */}
+
+
+
+
+
+                      {/* <Select
                         onChange={(e) => handlePartner_maritalStatus(e)}
                         options={Marital_status}
                         className="text-gray-600 border border-gray-400 mt-2"
                         placeholder=""
-                      />
+                      /> */}
                       <div></div>
                     </div>
                   </div>
